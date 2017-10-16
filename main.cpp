@@ -82,6 +82,6 @@ int main()
             }while( understood = false);
     
           }
-       }while(loop = true); 
+       }while(loop == true); 
 return 0;
 }
