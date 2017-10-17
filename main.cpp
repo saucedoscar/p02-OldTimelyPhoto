@@ -14,13 +14,12 @@ int main()
     bool validImage ;
     string OldTimeyPhoto;
     vector < vector <Pixel> > bmp;
-    //ask user for file
-    cout<<"Please give me a bmp file to change to black and white."<<endl;
-    //store the user's ipute in a variable.
-    cin>>file;
-    image.open(file);
-    
     do{
+        //ask user for file
+        cout<<"Please give me a bmp file to change to black and white."<<endl;
+        //store the user's input in a variable
+        cin>>file;
+        image.open(file);
         if(image.isImage() == true)//if image isImage();
         {
             bmp = image.toPixelMatrix();
@@ -32,42 +31,42 @@ int main()
                     rgb = bmp[r][c];
                     if(rgb.green >= rgb.red && rgb.green >= rgb.blue)
                     {
-                    rgb.red = rgb.green;
-                    rgb.blue = rgb.blue;
-                    bmp[r][c] = rgb;
+                        rgb.red = rgb.green;
+                        rgb.blue = rgb.blue;
+                        bmp[r][c] = rgb;
                     }
                     if(rgb.red >= rgb.green && rgb.red >= rgb.blue)
                     {
-                    rgb.green = rgb.red;
-                    rgb.blue = rgb.red;
-                    bmp[r][c] = rgb;
+                        rgb.green = rgb.red;
+                        rgb.blue = rgb.red;
+                        bmp[r][c] = rgb;
                     }
                     if(rgb.blue >= rgb.red && rgb.blue >= rgb.green)
                     {
-                    rgb.red = rgb.blue;
-                    rgb.green = rgb.blue;
-                    bmp[r][c] = rgb;
+                        rgb.red = rgb.blue;
+                        rgb.green = rgb.blue;
+                        bmp[r][c] = rgb;
                     }
                 }
             }
-            image.fromPixelMatrix(bmp);
-            image.save("OldTimeyPhoto.bmp");
             //override the greyscale image onto the original bmp image
-
-            //save the bmp file
+            image.fromPixelMatrix(bmp);
+            //Save the file
+            image.save("OldTimeyPhoto.bmp");
             loop = false;
         }
         else
         {
         cout<<"I am sorry, the file must be a 24 bit depth Windows BMP file. Would you like to try again with another file?"<<endl;
-        cin>>response;
-            do
+            do //If the user is not understood, this loop will continue until they are understood
             {   
+                
+                cout<<"Type Y for yes, N for no."<<endl;
+                cin>>response;
                 if(response == 'Y'|| response == 'y')
                 {
-
-                    understood = true;
-                    loop = true;
+                   understood = true; 
+                   loop = true;
                 }
                 else if(response == 'N'|| response == 'n')
                 {
@@ -76,12 +75,12 @@ int main()
                 }
                 else
                 {
-                    cout<<"Sorry that response is invalid. Please type'y' for yes and 'n' for no."<<endl;
+                    cout<<"Sorry that response is invalid."<<endl;
                     understood = false;
                 }
-            }while( understood = false);
+            }while( understood == false);
     
-          }
-       }while(loop == true); 
+       }
+     }while(loop == true); 
 return 0;
 }
